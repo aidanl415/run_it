@@ -1,0 +1,123 @@
+#START HERE: Anything in red is a "comment" - it doesn't effect the code, but it allows the coder to jot down clarifying notes.
+
+import xlrd
+formatting_info=False
+book = xlrd.open_workbook("Feedback_MineralIDLabReport.xlsx")
+sh = book.sheet_by_index(0)
+# -*- coding: utf-8 -*-
+
+#All you'll need to change above is the name of the spreadsheet you're reading.
+
+#IMPORTANT:
+# - The spreadsheet name is case sensitive, and can't have any spaces ( _ works well instead).
+# - The spreadsheet MUST BE IN THE SAME FOLDER as this Python file and the "xlrd" folder.
+
+#The rest of the code above can just be copied. :)
+
+
+n = 0
+
+    #We'll define "n" as the number 0, and use it to refer to specific rows in the spreadsheet containing students' info.
+    #Starting from n = 0, we'll increase n by 1 to access info on each student in every new row of the spreadsheet.
+    #This is called a "while loop": use the same code on each line, until we cycle through all students (see "##" at the bottom of this page).
+
+while n<86:
+    
+    #To test new code, leave the "n<__" value small, so it stops after a few students.
+    #When we've perfected the code, we'll increase to include all students.
+
+
+    #Define the variable "name" to be the cell that contains each students name.
+    #ROW 0 is the FIRST row in your sheet, COLUMN 0 is the FIRST column, aka "Column A".
+
+    name = sh.cell_value(rowx=n, colx=0)
+
+
+#___________________________________________________________________________________________________
+#___________________________________________________________________________________________________
+    
+    
+    # NOW we'll begin the meat of the code - where you control who gets what message, and why.
+    # - "STRINGS" of TEXT must be in quotes before and after - Python automatically colors the text GREEN.
+    # - Separate any parts (quoted strings or cell values) of your message with a comma.
+    # - A LINE BREAK is coded \n, in quotes. (That's a BACKSLASH, NOT a forward slash by the ? key...)
+
+    print name,',','\n'
+
+    #Alternate b/w text strings (green) and cell values (black) to build a personalized message.
+    #Change the colx= value to refer to different columns in the sheet that contain different info
+
+    print "Your overall lab report grade is",sh.cell_value(rowx=n, colx=2),". This is an average of your grade on these learning targets:",'\n','\n',
+    
+    print "LT 1: I can create a professional lab report.",sh.cell_value(rowx=n, colx=9),'\n',  # Column 4 is the worksheet grade in the spreadsheet
+    print "LT 2: I can create a detailed procedure.",sh.cell_value(rowx=n, colx=10),'\n',
+    print "LT 3: I can analyze my data and results.",sh.cell_value(rowx=n, colx=11),'\n',
+    print "LT 4: I can write a conclusion.",sh.cell_value(rowx=n, colx=12),'\n','\n',
+
+    #Use 'if','else', etc (called "CONDITIONAL STATEMENTS") to script out who gets what message.
+    #Useful conditional comparisons:  == (equals)  != (does not equal)  <   >   <=   >=  (because "=" is used to define variables, we use "==" in conditional statements)  
+            #In Python, CONDITIONAL statement lines must end in ":" INDENT all embedded commands exactly ONCE.
+
+    #Feedback options for LT 1: I can create a professional lab report.
+    if sh.cell_value(rowx=n, colx=4) == 1.00:
+        print "Your lab report is incomplete.",'\n','\n',
+    if sh.cell_value(rowx=n, colx=4) == 2.00:
+        print "Your lab report contains more than 4 grammar, spelling, or punctuation errors. Make sure to carefully craftsmanship check your writing.",'\n','\n',
+    if sh.cell_value(rowx=n, colx=4) == 3.00:
+        print "In order to write professionally, work on being clear and concise. This means to not use extra words and sentences that are unnecessary, and to get your point across as clearly and simply as possible.",'\n','\n',          
+    if sh.cell_value(rowx=n, colx=4) == 4.00:
+        print "Your lab report is professional because it's complete, concisely written, and nicely craftmanship-checked. Keep up the great work!",'\n','\n',
+
+
+    #Feedback options for LT 2: I can create a detailed procedure.
+
+    if sh.cell_value(rowx=n, colx=5) == 1.00:
+        print "You do not have complete procedures for both finding the streak and finding the hardness.",'\n','\n',
+    if sh.cell_value(rowx=n, colx=5) == 2.00:
+        print "In each procedure, make sure to explain exactly what to write in your data table for any scenario. This is how you make sure that the next scientists records the dependent variable.",'\n','\n',
+    if sh.cell_value(rowx=n, colx=5) == 3.00:
+        print "In order for another scientist to go through your procedure correctly, you must make your procedures more detailed and specific. Adding more strategic diagrams may help.",'\n','\n',           
+    if sh.cell_value(rowx=n, colx=5) == 4.00:
+        print "Your procedures are specific, detailed, and repeatable. If you included diagrams, they were strategic and helpful in understanding the procedure. Nice work!",'\n','\n',
+
+
+    #Feedback options for LT 3: I can analyze my data and results.
+
+    if sh.cell_value(rowx=n, colx=6) == 1.00:
+        print "You do not have three complete results paragraphs.",'\n','\n',
+    if sh.cell_value(rowx=n, colx=6) == 2.00:
+        print "Make sure to explain each observation you made and how closely it matches with the properties listed in the Mineral ID Key.",'\n','\n',
+    if sh.cell_value(rowx=n, colx=6) == 3.00:
+        print "In each results paragraph, conclude your analysis by tying it back to your claim. Make it clear what mineral you're proposing each sample is as your concluding sentence.",'\n','\n',
+    if sh.cell_value(rowx=n, colx=6) == 4.00:
+        print "Your results would be stronger if you explained why each property didn't exactly match up.You should push yourself to include evidence and reasoning explaining why your identification of this mineral still makes sense.",'\n','\n',
+    if sh.cell_value(rowx=n, colx=6) == 5.00:
+        print "One or more of your minerals were identified incorrectly.",'\n','\n',       
+    if sh.cell_value(rowx=n, colx=6) == 6.00:
+        print "You explain both your data and the Mineral ID Key in detail to clearly convince the reader that your identification of all three minerals is correct. Exceptional!",'\n','\n',
+   
+
+    #Feedback options for LT 4: I can write a conclusion.
+
+    if sh.cell_value(rowx=n, colx=7) == 1.00:
+        print "You do not have a complete conclusion paragraph.",'\n','\n',
+    if sh.cell_value(rowx=n, colx=7) == 2.00:
+        print "Make sure to explain clearly why these tests were helpful or unhelpful. Give examples to make it concrete.",'\n','\n',
+    if sh.cell_value(rowx=n, colx=7) == 3.00:
+        print "You must describe 3 valid sources.of error. Make sure that each source of error is specific to a certain part of your procedure. Explain how each source of error could have affected your data AND recommend how you could change your procedure to minimize this error. Saying you'll work more carefully is NOT a specific recommendation. ",'\n','\n',
+    if sh.cell_value(rowx=n, colx=7) == 4.00:
+        print "You clearly analyze the usefulness of multiple properties in identifying minerals by giving clear examples from experimentation with your partner. Your three or more sources of error are valid, and you specifically explain how each may have affected your data. You recommeded some great ways to minimize this error for next time.",'\n','\n',
+      
+
+   
+
+
+    #Print "##" after each student, in order to separate each student by page before printing from a word processing program.
+
+    print "##"
+
+
+    #Before cycling through the "while loop" again, we increase "n" by 1, to use data for the next student.
+    
+    n += 1
+
